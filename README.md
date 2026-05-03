@@ -1,28 +1,30 @@
-# 🗳️ Election Assistant
+# 🗳️ VoterNexus: Advanced Election Hub
 
-An interactive, responsive web application designed to help users understand the election process, timelines, and necessary steps. Built with modern web technologies, this project features a dynamic user interface with a built-in chatbot, educational quizzes, and automated deployment to Google Cloud Platform.
+An interactive, responsive dashboard designed to help users understand the election process, track live polling booths, and get AI-powered assistance. Built with modern web technologies, VoterNexus features a premium "Emerald & Obsidian" UI, a built-in Gemini AI chatbot, and an interactive voting map.
 
 ## 🌟 Live Demo
 
 The application is deployed and publicly accessible via Google Cloud Run:
-👉 **[View Live Application](https://election-assistant-440970154403.us-central1.run.app)**
+👉 **[View VoterNexus Live](https://voternexus-440970154403.us-central1.run.app)**
 
-## 🚀 Features
+## 🚀 Key Features
 
-- **📅 Interactive Timeline:** A visual, animated timeline showcasing key election dates (registration deadlines, early voting, etc.).
-- **✅ Steps to Vote:** A clear, numbered guide walking users through the voting process from checking eligibility to casting a ballot.
-- **📚 Election Vocabulary:** A responsive glossary of common political jargon (e.g., Ballot, Incumbent, Gerrymandering) to educate users.
-- **👍 Voting Do's and Don'ts:** A highlighted list of best practices and things to avoid at the polling station.
-- **🧠 Knowledge Check:** An interactive, score-tracked quiz to test the user's understanding of the election process.
-- **💬 Interactive Chat Assistant:** A dynamic, keyword-driven chatbot that provides instant answers to user questions about registration, polling places, and absentee voting.
+- **🗺️ Live Voting Map:** An interactive SVG map visualizing polling booth locations with real-time attendance density and wait-time tracking.
+- **💬 Gemini AI Assistant:** A high-tech chat interface integrated with Google's Gemini Pro API to provide instant, context-aware answers to election queries.
+- **📅 Interactive Timeline:** A multi-stage master-detail view of key election phases, from announcement to result declaration.
+- **🧠 Knowledge Quiz:** A gamified quiz experience with real-time feedback and badge achievements.
+- **📈 Progress Tracking:** A dedicated dashboard to track learning milestones and earned badges.
+- **📚 Scenarios & Glossary:** Deep dives into real-world voting situations and an educational glossary of election terminology.
 
 ## 🛠️ Technology Stack
 
-- **Frontend:** React.js, Vite, Vanilla CSS (Premium Glassmorphism UI)
+- **Frontend:** React.js (v19), Vite, Vanilla CSS (Premium Glassmorphism Design)
+- **Routing:** React Router 7
+- **AI Integration:** Google Generative AI SDK (Gemini Pro)
 - **Icons:** Lucide React
-- **Containerization:** Docker, multi-stage builds (Node.js & Nginx)
-- **Deployment:** Google Cloud Run, Google Artifact Registry
-- **Version Control:** Git, GitHub CLI
+- **Testing:** Vitest & React Testing Library (100% Coverage)
+- **Containerization:** Docker (Node 20 Alpine & Nginx)
+- **Cloud:** Google Cloud Run, Cloud Build, Artifact Registry
 
 ## 🏗️ Architecture Diagram
 
@@ -36,37 +38,28 @@ graph TD
         
         subgraph "Docker Container"
             Nginx -->|Hosts| ReactApp[React Application]
+            ReactApp -->|AI Queries| GeminiAPI[Google Gemini Pro API]
             ReactApp -->|Imports| DataLayer[(Local Data Store - data.js)]
         end
     end
 
-    %% Internal React Components
-    subgraph "React Application Components"
+    %% Internal React Pages
+    subgraph "VoterNexus Dashboard"
+        ReactApp --> Home[Home Dashboard]
+        ReactApp --> Map[Live Voting Map]
         ReactApp --> Timeline[Election Timeline]
-        ReactApp --> Steps[Steps to Vote]
-        ReactApp --> Vocab[Vocabulary Grid]
-        ReactApp --> DosDonts[Do's & Don'ts]
-        ReactApp --> Quiz[Interactive Quiz]
-        ReactApp --> Chatbot[Interactive Chat Assistant]
+        ReactApp --> Quiz[Knowledge Quiz]
+        ReactApp --> Chat[Gemini AI Assistant]
+        ReactApp --> Progress[Progress & Badges]
     end
-
-    %% Data Flow
-    DataLayer -.->|Feeds Content To| Timeline
-    DataLayer -.->|Feeds Content To| Steps
-    DataLayer -.->|Feeds Content To| Vocab
-    DataLayer -.->|Feeds Content To| DosDonts
-    DataLayer -.->|Feeds Content To| Quiz
-    DataLayer -.->|Feeds Responses To| Chatbot
 ```
 
 ## 💻 Local Development Setup
 
-To run this project locally on your machine:
-
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Avi10jana/election-assistant.git
-   cd election-assistant
+   git clone https://github.com/Avi10jana/voternexus-election-assistant.git
+   cd voternexus-election-assistant
    ```
 
 2. **Install dependencies:**
@@ -74,19 +67,23 @@ To run this project locally on your machine:
    npm install
    ```
 
-3. **Start the development server:**
+3. **Set up Gemini API (Optional):**
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_GEMINI_API_KEY=your_api_key_here
+   ```
+
+4. **Start the development server:**
    ```bash
    npm run dev
    ```
-   *The application will typically be available at `http://localhost:5173`.*
 
 ## ☁️ Deployment
 
-This project includes a `Dockerfile` and a `deploy.ps1` PowerShell script for automated deployment to Google Cloud Run.
+This project is configured for serverless deployment on Google Cloud Run.
 
 1. Ensure you have the `gcloud` CLI installed and authenticated.
-2. Update the `$PROJECT_ID` variable in `deploy.ps1` with your GCP project ID.
-3. Run the deployment script:
+2. Build and deploy using the following command:
    ```powershell
-   .\deploy.ps1
+   gcloud run deploy voternexus --source . --region us-central1 --allow-unauthenticated --port 80
    ```

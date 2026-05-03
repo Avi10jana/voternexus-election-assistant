@@ -131,12 +131,12 @@ export const electionData = {
       ]
     },
     {
-      questionText: "Which of the following is NOT a common way to vote?",
+      questionText: "Which body conducts elections in India?",
       answerOptions: [
-        { answerText: "In-person on Election Day", isCorrect: false },
-        { answerText: "Early voting", isCorrect: false },
-        { answerText: "Voting by phone call", isCorrect: true },
-        { answerText: "Absentee/Mail-in voting", isCorrect: false }
+        { answerText: "Supreme Court", isCorrect: false },
+        { answerText: "Election Commission of India", isCorrect: true },
+        { answerText: "Lok Sabha", isCorrect: false },
+        { answerText: "Rajya Sabha", isCorrect: false }
       ]
     },
     {
@@ -148,5 +148,24 @@ export const electionData = {
         { answerText: "Recall Election", isCorrect: false }
       ]
     }
+  ],
+  scenarios: [
+    { id: 1, title: "What happens if I don't vote?", icon: "UserX" },
+    { id: 2, title: "What if a candidate gets equal votes?", icon: "Scale" },
+    { id: 3, title: "How are votes counted?", icon: "ClipboardList" },
+    { id: 4, title: "What happens after voting ends?", icon: "Flag" }
+  ],
+  badges: [
+    { id: 1, name: "First Steps", icon: "Star", color: "#10b981" },
+    { id: 2, name: "Timeline Explorer", icon: "Clock", color: "#84cc16" },
+    { id: 3, name: "Quiz Master", icon: "Trophy", color: "#10b981" },
+    { id: 4, name: "Scenario Solver", icon: "Award", color: "#555" }
+  ],
+  mapData: [
+    { id: 1, name: "Central Station", x: 120, y: 150, type: "active", density: "High" },
+    { id: 2, name: "West Library", x: 340, y: 80, type: "active", density: "Low" },
+    { id: 3, name: "East Community Center", x: 450, y: 220, type: "closed", density: "N/A" },
+    { id: 4, name: "South High School", x: 280, y: 350, type: "active", density: "Medium" },
+    { id: 5, name: "North Post Office", x: 520, y: 120, type: "active", density: "Medium" }
   ]
 };
